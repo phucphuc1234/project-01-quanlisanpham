@@ -1,0 +1,17 @@
+const express = require("express");
+const multer = require('multer');
+const validateproduct = require("../../validates/admin/products.validates");
+const multerhelper = require("../../helpers/multer");
+const upload = multer({ storage: multerhelper() });
+const router = express.Router();
+const controller = require("../../controllers/admin/products.controller");
+router.get("/", controller.index);
+router.patch("/change-status/:status/:id", controller.changestatus);
+router.patch("/change-multi", controller.changemulti);
+router.delete("/delete/:id", controller.deleteitem);
+router.get("/create", controller.create);
+router.post("/create", upload.single('thumbnail'), validateproduct.createPost, controller.createPost);
+router.get("/edit/:id", controller.edit);
+router.patch("/edit/:id", upload.single('thumbnail'), validateproduct.createPost, controller.editPatch);
+router.get("/detail/:id", controller.detail);
+module.exports = router;

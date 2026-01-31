@@ -1,0 +1,41 @@
+extends ../../layouts/defaul.pug
+
+block main
+  .product-detail-container
+    .product-detail
+      if (product.thumbnail)
+        .product-image
+          img(src=product.thumbnail alt=product.title)
+
+      .product-content
+        if (product.title)
+          h1.product-title #{product.title}
+
+        if (product.price)
+          p.product-price #{product.price}$
+
+        if (product.discountPercentage)
+          p.product-discount
+            | Giảm giá:
+            span #{product.discountPercentage}%
+
+        if (product.stock)
+          p.product-stock
+            | Còn lại:
+            span #{product.stock}
+
+        if (product.status)
+          p.product-status
+            | Trạng thái:
+            if (product.status === "active")
+              span.status-active Còn hàng
+            else
+              span.status-inactive Hết hàng
+
+        if (product.description)
+          .product-description
+            h3 Mô tả sản phẩm
+            p #{product.description}
+
+        .product-actions
+          a.btn.btn-outline(href="/products") Quay lại
