@@ -1,0 +1,26 @@
+{
+  "name": "do-thi-so",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Nền tảng phản ánh hạ tầng đô thị - React, Node.js, SQL Server",
+  "scripts": {
+    "prepare:env": "node scripts/prepare-env.mjs",
+    "setup": "npm run prepare:env && npm --prefix backend ci && npm --prefix frontend ci",
+    "dev": "concurrently --kill-others --names API,WEB --prefix-colors cyan,green \"npm --prefix backend run dev\" \"npm --prefix frontend run dev\"",
+    "db:init": "npm --prefix backend run db:init",
+    "db:seed": "npm --prefix backend run db:seed",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix backend start",
+    "test:integration": "node --test --test-concurrency=1 tests/integration.test.mjs",
+    "test:ui": "node tests/ui-smoke.cjs",
+    "test:ui:workflow": "node tests/ui-workflow.cjs"
+  },
+  "devDependencies": {
+    "@sparticuz/chromium": "^153.0.0",
+    "concurrently": "^9.2.1",
+    "playwright": "^1.64.1"
+  },
+  "engines": {
+    "node": "^22.17.0 || >=24.0.0"
+  }
+}
